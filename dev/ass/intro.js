@@ -18,7 +18,17 @@ task for getting to know the terminal and the game.
 			id: "try",
 			evaluate: function () { return true; },
 			set: function () {
-				setTimeout(function () { $("#input-terminal").hgBlink(3); }, 1000);
+				setTimeout(function () { 
+
+					$("#tab-task li:first").hgBlink(3); 
+					
+					setTimeout(function () { 
+
+						$("#input-terminal").hgBlink(3); 
+						
+					}, 2500);
+					
+				}, 1500);
 			},
 			points: 10
 		},
@@ -57,24 +67,18 @@ task for getting to know the terminal and the game.
 			points: 10
 		},
 		{
-			id: "pwd",
+			id: "help-all",
 			evaluate: function (obj) {
-				var rgx = /^pwd$/;
-				return rgx.test(obj.input);
+				return obj.input === "help";
 			},
-			points: 5
+			points: 10
 		},
 		{
-			id: "tree",
-			evaluate: function (input) {
-				if (!stash.tree) { stash.tree = {}; }
-				if (input.command != "tree") { return false; }
-				
-				if (input.argsString == "") { stash.tree.a = true; }
-				if (input.argsString == "/home") { stash.tree.b = true; }
-				return stash.tree.a && stash.tree.b;
+			id: "ls",
+			evaluate: function (obj) {
+				return obj.input === "ls";
 			},
-			points: 25
+			points: 10
 		},
 		{
 			id: "finish",
